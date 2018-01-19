@@ -18,19 +18,34 @@ public class TestMatchingBrackets {
 		assertFalse(doBracketsMatch("}{"));
 	}
 
-	// USE A STACK TO COMPLETE THE METHOD FOR CHECKING IF EVERY OPENING BRACKET HAS A MATCHING CLOSING BRACKET
-	private boolean doBracketsMatch(String b) {
+	// USE A STACK TO COMPLETE THE METHOD FOR CHECKING IF EVERY OPENING BRACKET HAS
+	// A MATCHING CLOSING BRACKET
+	private boolean doBracketsMatch(String b) { //{}
 		Stack<Character> brackets = new Stack<Character>();
-		for (int i = 0; i < brackets.size(); i++) {
-		System.out.println(brackets);	
+
+		for (int i = 0; i < b.length(); i++) {
+			if (b.charAt(0)== '}') {
+				brackets.push('}');
+			}
+			if (b.charAt(i) == '{') {
+				brackets.push('{');
+			}
+			
+			if (b.charAt(i) == '}') {
+				brackets.pop();
+			}
+
+			
+		
 		}
-//		if (b.equals("{")) {
-//			
-//		}
-//		
-//		brackets.push(b);
-//		
+if (brackets.isEmpty() == true) {
+	return true;
+}
+//else if (!brackets.isEmpty()) {
+//return false;
+//} 
+System.out.println(brackets);
 		return false;
-		}
+	}
 
 }
