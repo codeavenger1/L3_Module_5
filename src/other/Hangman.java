@@ -19,7 +19,6 @@ public class Hangman implements KeyListener, ActionListener{
 	JFrame frame;
 	JPanel panel;
 	JLabel label;
-	JButton button;
 	Stack<String> stack = new Stack<>();
 public static void main(String[] args)  {
 	Hangman hangman = new Hangman();
@@ -32,18 +31,12 @@ void main2(){
 	frame = new JFrame();
 	panel = new JPanel();
 	label = new JLabel();
-	button = new JButton();
-	panel.setLayout(new GridLayout(2, 2));
-//	panel.add(button);
 	panel.add(label);
-	
 	frame.setVisible(true);
 	frame.setSize(500, 500);
 	frame.add(panel);
 	frame.setTitle("HaNgMaN");
 	frame.addKeyListener(this);
-	button.addActionListener(this);
-	button.setText("click here to add a letter");
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	stack.push("");
 	
@@ -164,10 +157,14 @@ public void keyPressed(KeyEvent e) {
 		label.setText("_ _ _ _ _ _ _ _ _ _ _");
 		}
 	
+	String word = stack.peek();
+	for (int j = 0; j <word.length(); j++) {
+		
+	
 		String letter = JOptionPane.showInputDialog("type a letter");
 		if (stack.peek().contains(letter)) {
 			
-			String word = stack.peek();
+			
 		for (int i = 0; i < word.length(); i++) {
 			if (letter.contains(word.charAt(i)+"")) {
 			StringBuilder build = new StringBuilder(label.getText());
@@ -180,11 +177,21 @@ public void keyPressed(KeyEvent e) {
 				System.out.println("match");
 			}
 			
+			String text = label.getText().replaceAll("\\s", "");
+			System.out.println(text);
+			if (!text.contains(letter)) {
+				System.out.println("WRONG");
+			}
+			
+			if (text.equals(word)) {
+				break;
+			}
 			
 			
 		}
+			
 		}
-		frame.pack();
+		}
 }
 
 @Override
