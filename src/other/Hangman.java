@@ -1,5 +1,6 @@
 package other;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Stack;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,6 +21,9 @@ public class Hangman implements KeyListener, ActionListener{
 	JFrame frame;
 	JPanel panel;
 	JLabel label;
+	JLabel label2;
+	
+	int lives = 19;
 	Stack<String> stack = new Stack<>();
 public static void main(String[] args)  {
 	Hangman hangman = new Hangman();
@@ -31,7 +36,10 @@ void main2(){
 	frame = new JFrame();
 	panel = new JPanel();
 	label = new JLabel();
+	label2 = new JLabel();
+	label.setLocation(100,100);
 	panel.add(label);
+	panel.add(label2);
 	frame.setVisible(true);
 	frame.setSize(500, 500);
 	frame.add(panel);
@@ -39,7 +47,6 @@ void main2(){
 	frame.addKeyListener(this);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	stack.push("");
-	
 	
 }
 
@@ -158,10 +165,12 @@ public void keyPressed(KeyEvent e) {
 		}
 	
 	String word = stack.peek();
-	for (int j = 0; j <word.length(); j++) {
+	
+	for (int j = 0; j < 20; j++) {
+		
 		
 	
-		String letter = JOptionPane.showInputDialog("type a letter");
+String letter = JOptionPane.showInputDialog("type a letter");
 		if (stack.peek().contains(letter)) {
 			
 			
@@ -179,17 +188,24 @@ public void keyPressed(KeyEvent e) {
 			
 			String text = label.getText().replaceAll("\\s", "");
 			System.out.println(text);
-			if (!text.contains(letter)) {
-				System.out.println("WRONG");
-			}
+			
 			
 			if (text.equals(word)) {
-				break;
+				JOptionPane.showMessageDialog(null, "Good job!");
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				
 			}
 			
 			
 		}
+		
+		
 			
+		}
+		
+		else {
+			label2.setText(" you have " + lives-- + " lives ");
+			label2.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		}
 		}
 }
@@ -198,6 +214,7 @@ public void keyPressed(KeyEvent e) {
 public void keyReleased(KeyEvent e) {
 	// TODO Auto-generated method stub
 	
+		
 }
 
 @Override
